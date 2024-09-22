@@ -5,8 +5,8 @@ import { useState, useEffect, useContext } from "react";
 
 export default function User() {
     const [allTask, setAllTask] = useState([]);
-    const { user } = useContext(UserContext); // User from context
-  console.log("user",user)
+  const {user}=useContext(UserContext)
+  
     async function getAllTaskUser() {
         try {
             const loadUserTask = await getAllTask(); // Fetch tasks
@@ -17,7 +17,7 @@ export default function User() {
     }
 
     useEffect(() => {
-        getAllTaskUser(); // Fetch tasks on component mount
+        getAllTaskUser(); // Call the function to fetch tasks on component mount
     }, []);
 
     return (
@@ -36,7 +36,7 @@ export default function User() {
                                     Status: <span className="font-bold">{task.status}</span>
                                 </p>
                                 <p className="text-right">
-                                    Author: <span className="font-bold">{task.user?.name || "Unknown"}</span> {/* Access user name from task */}
+                                    Author: <span className="font-bold">{task.user?.name || "Unknown"}</span> {/* Access user name directly */}
                                 </p>
                             </div>
                         </div>
