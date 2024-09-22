@@ -27,3 +27,23 @@ export async function getTaskUser(userId) {
    }
  }
  
+ export async function getAllTask() {
+  try {
+      const result = await httpAxios.get(`/api/tasks/`); // Make sure this endpoint is correct
+      return result.data;
+  } catch (error) {
+      console.error("Error fetching tasks:", error);
+      throw error; // Rethrow the error
+  }
+}
+
+// In taskServices.js
+export async function updateTask(taskId, updatedTask) {
+  try {
+    const result = await httpAxios.put(`/api/tasks/${taskId}`, updatedTask);
+    return result.data;
+  } catch (error) {
+    console.error("Error updating task:", error);
+    throw error; // Rethrow the error to handle it later if necessary
+  }
+}

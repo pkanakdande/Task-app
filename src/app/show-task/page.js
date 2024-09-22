@@ -39,6 +39,7 @@ const ShowTaskPage = () => {
       toast.error("Failed to delete task");
     }
   }
+  
 
   return (
     <div className="grid grid-cols-12 mt-3 text-white">

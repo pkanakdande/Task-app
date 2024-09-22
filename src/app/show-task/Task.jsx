@@ -9,15 +9,17 @@ const Task = ({ task, deleteTaskparents }) => {
   function deleteTasks(taskId) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success custom-confirm-button",
-        cancelButton: "btn btn-danger custom-cancel-button"
+        confirmButton: "btn-confirm", // Custom class for confirm button
+        cancelButton: "btn-cancel",   // Custom class for cancel button
+        title: "swal-title",           // Optional: Custom class for title
+        content: "swal-content"        // Optional: Custom class for content
       },
       buttonsStyling: false
     });
 
-    swalWithBootstrapButtons.fire({
+    Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You want to delete it!!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
@@ -26,13 +28,13 @@ const Task = ({ task, deleteTaskparents }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteTaskparents(taskId);
-        swalWithBootstrapButtons.fire(
+        Swal.fire(
           "Deleted!",
           "Your task has been deleted.",
           "success"
         );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithBootstrapButtons.fire(
+        Swal.fire(
           "Cancelled",
           "Your task is safe :)",
           "error"
@@ -61,34 +63,8 @@ const Task = ({ task, deleteTaskparents }) => {
         </div>
       </div>
 
-      {/* Custom CSS for SweetAlert buttons */}
-      <style jsx>{`
-        .custom-confirm-button {
-          background-color: #28a745; /* Green */
-          color: white;
-          border-radius: 5px;
-          padding: 10px 20px;
-          border: none;
-          transition: background-color 0.3s;
-        }
-
-        .custom-confirm-button:hover {
-          background-color: #218838; /* Darker green on hover */
-        }
-
-        .custom-cancel-button {
-          background-color: #dc3545; /* Red */
-          color: white;
-          border-radius: 5px;
-          padding: 10px 20px;
-          border: none;
-          transition: background-color 0.3s;
-        }
-
-        .custom-cancel-button:hover {
-          background-color: #c82333; /* Darker red on hover */
-        }
-      `}</style>
+     
+    
     </div>
   );
 };

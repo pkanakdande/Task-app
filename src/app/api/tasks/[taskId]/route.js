@@ -37,6 +37,7 @@ export async function DELETE(request, { params }) {
   try {
     const { taskId } = params;
 
+    
     // Delete the task from the database
     await Task.deleteOne({ _id: taskId });
 
@@ -49,3 +50,8 @@ export async function DELETE(request, { params }) {
     return NextResponse.json({ message: 'Failed to delete task', error: error.message }, { status: 500 });
   }
 } 
+
+
+
+
+

@@ -39,7 +39,7 @@ const LoginPage = () => {
         console.log(result);
         toast.success("Logged in successfully");
         context.setUser(result.user)
-        router.push("/profile/user")
+        router.push("/")
   }
   catch(error){
     toast.error(error.response.data.message)
