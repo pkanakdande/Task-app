@@ -15,7 +15,7 @@ export async function middleware(request) {
 
   if (notAccessPathUserLogin) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/profile/user", request.url));
+      return NextResponse.redirect(new URL("/AllTask", request.url));
     }
   } else {
     if (!authToken) {

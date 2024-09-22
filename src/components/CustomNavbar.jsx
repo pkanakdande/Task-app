@@ -39,7 +39,7 @@ console.log(context)
     context.user && (
         <>
         <li><Link href='/' className='hover:text-blue-300'>Home</Link> </li>
-          <li><Link href='/profile/user' className='hover:text-blue-300'>Tasks</Link> </li>
+          <li><Link href='/AllTask' className='hover:text-blue-300'>Tasks</Link> </li>
     <li><Link href='/add-task' className='hover:text-blue-300'>Add Task</Link> </li>
     <li><Link href='/show-task' className='hover:text-blue-300'>Show Task</Link> </li>
         </>
