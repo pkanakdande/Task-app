@@ -5,8 +5,7 @@ import { useState, useEffect, useContext } from "react";
 
 export default function User() {
   const [allTask, setAllTask] = useState([]);
-  const { user } = useContext(UserContext); // User from context
-  console.log("user", user);
+ 
 
   async function getAllTaskUser() {
     try {
