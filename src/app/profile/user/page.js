@@ -46,12 +46,7 @@ export default function User() {
                   <p className="text-left">
                     Status: <span className="font-bold">{task.status}</span>
                   </p>
-                  <p className="text-right">
-                    Author:{" "}
-                    <span className="font-bold">
-                      {task.user?.name || "Unknown"} {/* Access user name from task */}
-                    </span>
-                  </p>
+                 
                 </div>
               </div>
             </div>
