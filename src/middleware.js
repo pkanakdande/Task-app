@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   const authToken = request.cookies.get("authToken")?.value;
 
-  // Skip processing if the request is for these API endpoints
+  // Skip processing if the request is for login or users API
   if (
     request.nextUrl.pathname === "/api/login" ||
     request.nextUrl.pathname === "/api/users"
@@ -11,21 +11,22 @@ export async function middleware(request) {
     return NextResponse.next(); // Allow the request to proceed
   }
 
-  const notAccessPathUserLogin =
+  const isLoginOrSignup =
     request.nextUrl.pathname === "/login" ||
     request.nextUrl.pathname === "/signup";
 
-  // If the user is logged in and trying to access login/signup pages, redirect to profile
-  if (notAccessPathUserLogin) {
+  // If the user is logged in and trying to access login/signup, redirect to home
+  if (isLoginOrSignup) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/", request.url)); // Redirect to home
     } else {
       return NextResponse.next(); // Allow access to login/signup
     }
   }
 
-  // For other routes, check if the user is authenticated
+  // For all other routes, check if user is authenticated
   if (!authToken) {
+    // API requests get JSON response on failure
     if (request.nextUrl.pathname.startsWith("/api")) {
       return NextResponse.json({
         message: "Access Denied",
@@ -33,11 +34,11 @@ export async function middleware(request) {
       });
     }
 
-    // Redirect to login if no authToken
+    // Redirect to login if no authToken for non-API routes
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Allow access to other routes if authenticated
+  // If authenticated, allow the request to proceed
   return NextResponse.next();
 }
 
