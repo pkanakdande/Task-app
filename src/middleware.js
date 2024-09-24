@@ -18,21 +18,25 @@ export async function middleware(request) {
   // If the user is logged in and trying to access login/signup, redirect to home
   if (isLoginOrSignup) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/", request.url)); // Redirect to home
+      return NextResponse.redirect(new URL("/profile/user", request.url)); // Redirect to home
     } else {
       return NextResponse.next(); // Allow access to login/signup
     }
   }
 
+  if(request.nextUrl.pathname==="/api/login"){
+    return
+  }
+
   // For all other routes, check if user is authenticated
   if (!authToken) {
     // API requests get JSON response on failure
-    if (request.nextUrl.pathname.startsWith("/api")) {
-      return NextResponse.json({
-        message: "Access Denied",
-        success: false,
-      });
-    }
+    // if (request.nextUrl.pathname.startsWith("/api")) {
+    //   return NextResponse.json({
+    //     message: "Access Denied",
+    //     success: false,
+    //   });
+    // }
 
     // Redirect to login if no authToken for non-API routes
     return NextResponse.redirect(new URL("/login", request.url));
