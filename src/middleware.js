@@ -18,7 +18,7 @@ export async function middleware(request) {
   // If the user is logged in and trying to access login/signup pages, redirect to profile
   if (notAccessPathUserLogin) {
     if (authToken) {
-      return NextResponse.redirect(new URL("/profile/user", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     } else {
       return NextResponse.next(); // Allow access to login/signup
     }
